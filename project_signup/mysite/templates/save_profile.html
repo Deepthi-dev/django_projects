@@ -1,0 +1,29 @@
+{% extends 'base.html'%}
+
+{% load static %}
+
+{% block content %}
+<h2>Hi {{user.username}},</h2>
+<div class="container">
+  <div class="jumbotron">
+      {% if registered %}
+        <h4>Here are your profile details</h4>
+        <p>portfolio site: <a href="{{profile_form.portfolio_site}}">{{profile_form.portfolio_site}}</a></p>
+        <img src="{{profile_form.profile_pic.url}}" alt="Image not found" width=300>
+      {% else %}
+        <h1>Register Here</h1>
+        <h3>Just fill out the form.</h3>
+
+        <form enctype="multipart/form-data" method="POST">
+          {% csrf_token %}
+          {{ profile_form.as_p }}
+          <input type="submit" name="" value="Register">
+        </form>
+
+      {% endif %}
+
+    </div>
+
+</div>
+
+{% endblock %}

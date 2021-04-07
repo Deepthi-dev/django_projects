@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head style="margin-bottom: 5%;">
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>{% block title %}{% endblock %}</title>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-light bg-light">
+      <a class="navbar-brand" href={% url 'home' %}>My Site!</a>
+      {% if user.is_authenticated %}
+
+        <form class="form-inline">
+          <strong class="mr-sm-2">You are logged in as {{ user.username }} </strong>
+          <a class="mr-sm-2 ml-sm-2" href="{% url 'save_profile' %}" role="button">Save your profile</a> /
+          <a class="mr-sm-2 ml-sm-2" href="{% url 'password_reset' %}">Change password</a> /
+          <a class="mr-sm-2 ml-sm-2" href="{% url 'logout' %}">Log Out</a>
+        </form>
+      {% else %}
+        <form class="form-inline">
+          <a class="btn btn-primary mr-sm-2" href="{% url 'signup' %}" role="button">Sign Up</a>
+          <a class="btn btn-primary mr-sm-2" href="{% url 'login' %}">Log In</a>
+        </form>
+      {% endif %}
+    </nav>
+
+    <div class="container mt-sm-4">
+      <div class="jumbotron">
+        {% block content%}
+        {% endblock %}
+      </div>
+    </div>
+
+  </body>
+</html>
